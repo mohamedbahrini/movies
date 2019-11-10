@@ -1,0 +1,20 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{movie.title}}</h5>
+        <p class="card-text">
+            <label>Type: </label> <span>{{movie.type}}</span><br />
+            <label>Release date: </label> <span>{{movie.releaseDate | date: 'dd/MM/yyyy'}}</span>
+        </p>
+        <label>Directors: </label>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let director of movie.directors">
+                {{director.firstname}} {{director.lastname}}
+            </li>
+        </ul>
+        <br>
+
+        <button class="btn btn-info btn-sm" (click)="editMovie(movie.id)">edit</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteMovie(movie)">delete</button>
+        
+    </div>
+</div>

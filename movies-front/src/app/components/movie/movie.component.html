@@ -1,0 +1,10 @@
+<button class="btn btn-info btn-sm" (click)="addMovie()">add movie</button>
+<div *ngIf="showEditing">
+    <app-movie-edit [movie]="editedMovie" (saveMovie)="saveMovie($event)"></app-movie-edit>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let movie of movies">
+        <app-movie-element class="m-2" [movie]="movie" (edit)="editMovie($event)" (delete)="deleteMovie($event)"></app-movie-element>
+    </div>
+</div>

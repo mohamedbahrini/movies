@@ -6,4 +6,7 @@ import com.example.movies.models.Movie;
 
 public interface MoviesService {
 	List<Movie> getAllMovies();
+	Movie saveMovie(Movie movie);
+	void updateMovie(Movie movie);
+	void deleteMovie(Long id);
 }

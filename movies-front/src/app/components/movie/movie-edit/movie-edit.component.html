@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-body">
+        <h3>Edit movie</h3>
+        <form name="movieForm" (ngSubmit)="saveChanges()">
+            <div class="form-group">
+                <label for="title">Movie title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Enter movie title"
+                    [(ngModel)]="editedMovie.title">
+            </div>
+            <div class="form-group">
+                <label for="type">Movie type</label>
+                <input type="text" class="form-control" id="type" name="type" placeholder="Enter movie type"
+                    [(ngModel)]="editedMovie.type">
+            </div>
+            <div class="form-group">
+                <label for="date">Release date</label>
+                <input type="text" class="form-control" id="date" name="date" placeholder="Enter release date"
+                    [(ngModel)]="editedMovie.releaseDate">
+            </div>
+            <label>Editors: </label>
+            <div *ngFor="let director of editedMovie.directors">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="firstname{{director.id}}"
+                            [(ngModel)]="director.firstname">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="lastname{{director.id}}"
+                            [(ngModel)]="director.lastname">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="showDirectorForm">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="firstname" [(ngModel)]="firstname" placeholder="firstname">
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="lastname" [(ngModel)]="lastname" placeholder="lastname">
+                </div>
+            </div>
+            <button class="btn btn-sm btn-info" (click)="addDirector()" *ngIf="!showDirectorForm">add director</button>
+            <button class="btn btn-sm btn-info" (click)="saveDirector()" *ngIf="showDirectorForm">save director</button>
+            <br>
+            <button type="submit" class="btn btn-sm btn-primary mt-2">Submit</button>
+        </form>
+    </div>
+</div>
