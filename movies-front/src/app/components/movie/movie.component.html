@@ -3,8 +3,35 @@
     <app-movie-edit [movie]="editedMovie" (saveMovie)="saveMovie($event)"></app-movie-edit>
 </div>
 
+<div class="row mt-2">
+    <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="type" [(ngModel)]="filters.type">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="title" [(ngModel)]="filters.title">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="date not working yet" [(ngModel)]="filters.releaseDate">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="editor not working yet" [(ngModel)]="filters.editor">
+    </div>
+</div>
+<div class="btn-group mt-2" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary" (click)="sort('title:asc')">title asc</button>
+    <button type="button" class="btn btn-secondary" (click)="sort('title:desc')">title desc</button>
+
+    <button type="button" class="btn btn-secondary" (click)="sort('type:asc')">type asc</button>
+    <button type="button" class="btn btn-secondary" (click)="sort('type:desc')">type desc</button>
+
+    <button type="button" class="btn btn-secondary" (click)="sort('releaseDate:asc')">date asc</button>
+    <button type="button" class="btn btn-secondary" (click)="sort('releaseDate:desc')">date desc</button>
+</div>
+<br>
+<button class="btn btn-sm btn-info mt-2" (click)="filter()">filter</button>
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let movie of movies">
-        <app-movie-element class="m-2" [movie]="movie" (edit)="editMovie($event)" (delete)="deleteMovie($event)"></app-movie-element>
+        <app-movie-element class="m-2" [movie]="movie" (edit)="editMovie($event)" (delete)="deleteMovie($event)">
+        </app-movie-element>
     </div>
 </div>

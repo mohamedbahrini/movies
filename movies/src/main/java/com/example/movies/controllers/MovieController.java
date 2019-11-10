@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.movies.models.Movie;
@@ -44,5 +45,10 @@ public class MovieController {
 	@DeleteMapping("/movie/{id}")
 	public void deleteMovie(@PathVariable Long id) {
 		moviesService.deleteMovie(id);
+	}
+	
+	@GetMapping("/search")
+	public List<Movie> searchMovie(@RequestParam String search, @RequestParam String sort){
+		return moviesService.searchMovies(search, sort);
 	}
 }

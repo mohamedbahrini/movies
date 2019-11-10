@@ -19,10 +19,16 @@ public class MovieUtil {
 		String[] directorNameList = movieDto.getDirector().split(",");
 		Set<Director> directors = new HashSet<>();
 		for (int i = 0; i < directorNameList.length; i++) {
-			String[] names = directorNameList[i].split(" ");
+			String splitNames = directorNameList[i];
+			String[] names = splitNames.split(" ");
 			Director director = new Director();
-			director.setFirstname(names[0]);
-			director.setLastname(names[1]);
+			if(names.length == 2) {
+				director.setFirstname(names[0]);
+				director.setLastname(names[1]);
+			} else if(names.length == 3) {
+				director.setFirstname(names[1]);
+				director.setLastname(names[2]);
+			}
 			directors.add(director);
 		}
 

@@ -9,4 +9,5 @@ public interface MoviesService {
 	Movie saveMovie(Movie movie);
 	void updateMovie(Movie movie);
 	void deleteMovie(Long id);
+	List<Movie> searchMovies(String search, String sort);
 }

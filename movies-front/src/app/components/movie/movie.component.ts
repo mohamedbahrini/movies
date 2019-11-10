@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Movie } from 'src/app/models/movie';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpUtil } from 'src/app/models/http.util';
 import { Observable, Subscription } from 'rxjs';
 
@@ -14,6 +14,8 @@ export class MovieComponent implements OnInit, OnDestroy {
   movieObservable: Subscription;
   showEditing: boolean = false;
   editedMovie: Movie;
+  filters = {};
+  sorting: string;
 
   constructor(private http: HttpClient) { }
 
@@ -21,7 +23,6 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.movieObservable = this.http.get(HttpUtil.baseurl + 'allMovies').subscribe(
       (data: Movie[]) => {
         this.movies = data;
-        console.log('movies', this.movies);
       },
       error => {
         console.log(error);
@@ -77,7 +78,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   }
 
   deleteMovie(movie: Movie) {
-    const url = `${HttpUtil.baseurl}movie/${movie.id}`; 
+    const url = `${HttpUtil.baseurl}movie/${movie.id}`;
     this.http.delete(url).subscribe(
       data => {
         this.ngOnInit();
@@ -96,9 +97,28 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.editedMovie.type = '';
   }
 
-  addMovie(){
+  addMovie() {
     console.log('called');
     this.emptyForm();
     this.showEditing = true;
+  }
+
+  sort(sorting){
+    this.sorting = sorting;
+    this.filter();
+  }
+
+  filter() {
+    let search = '';
+    const keys = Object.keys(this.filters);
+    keys.forEach(
+      key => search += key + ':' + this.filters[key] + ','
+    );
+    console.log('search before', search, 'sort', this.sorting);
+    
+    const url = `${HttpUtil.baseurl}search/?search=${search}&sort=${this.sorting}`;
+    this.http.get(url).subscribe(
+      (data: Movie[]) => {this.movies = data}
+    )
   }
 }
